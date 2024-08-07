@@ -1,0 +1,23 @@
+services:
+  app:
+    build: .
+    container_name: api
+    volumes:
+      - .:/app
+    ports:
+      - "4567:4567"
+
+  db:
+    image: postgres
+    container_name: database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: my_database
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+volumes:
+  pgdata:
