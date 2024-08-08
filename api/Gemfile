@@ -7,3 +7,8 @@ gem 'pg'
 gem 'csv'
 gem 'puma'
 gem 'rackup'
+
+group :test do
+    gem 'rspec'
+    gem 'rack-test'
+end
