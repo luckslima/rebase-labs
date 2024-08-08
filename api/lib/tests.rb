@@ -16,6 +16,12 @@ class Tests
     grouped_tests
   end
 
+  def find_by_token(token)
+    result = @conn.exec_params("SELECT * FROM tests WHERE token_resultado_exame = $1", [token])
+    grouped_tests = group_by_token(result)
+    grouped_tests.first
+  end
+
   private
 
   def group_by_token(result)

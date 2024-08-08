@@ -11,6 +11,17 @@ get '/tests' do
   all_tests.to_json
 end
 
+get '/tests/:token' do
+  tests = Tests.new
+  test = tests.find_by_token(params[:token])
+  if test
+    content_type :json
+    test.to_json
+  else
+    halt 404, { error: "Exame não encontrado" }.to_json
+  end
+end
+
 get '/' do
   'Hello, world!'
 end
