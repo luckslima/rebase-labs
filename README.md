@@ -46,7 +46,7 @@ Pronto! Agora é possível acessar a aplicação através da rota http://localho
 
 - 'GET /tests' 
 
-> Nesse endpoint é retornado uma listagem de todos os exames médicos importados do CSV no formato JSON.
+> Nesse endpoint é retornado uma listagem de todos os exames médicos importados do CSV no formato JSON e agrupados pelo token.
 
 Exemplo de resposta:
 ```json
@@ -135,5 +135,91 @@ Exemplo de resposta:
 ]
 ```
 
+- 'GET /tests/:token' 
 
+> Nesse endpoint é retornado detalhes de um exame médico através do token informado nos parametros.
+
+Exemplo de resposta:
+```json
+{
+    "result_token": "0W9I67",
+    "result_date": "2021-07-09",
+    "cpf": "048.108.026-04",
+    "name": "Juliana dos Reis Filho",
+    "email": "mariana_crist@kutch-torp.com",
+    "birthday": "1995-07-03",
+    "doctor": {
+        "crm": "B0002IQM66",
+        "crm_state": "SC",
+        "name": "Maria Helena Ramalho"
+    },
+    "tests": [
+        {
+            "type": "hemácias",
+            "limits": "45-52",
+            "result": "28"
+        },
+        {
+            "type": "leucócitos",
+            "limits": "9-61",
+            "result": "91"
+        },
+        {
+            "type": "plaquetas",
+            "limits": "11-93",
+            "result": "18"
+        },
+        {
+            "type": "hdl",
+            "limits": "19-75",
+            "result": "74"
+        },
+        {
+            "type": "ldl",
+            "limits": "45-54",
+            "result": "66"
+        },
+        {
+            "type": "vldl",
+            "limits": "48-72",
+            "result": "41"
+        },
+        {
+            "type": "glicemia",
+            "limits": "25-83",
+            "result": "6"
+        },
+        {
+            "type": "tgo",
+            "limits": "50-84",
+            "result": "32"
+        },
+        {
+            "type": "tgp",
+            "limits": "38-63",
+            "result": "16"
+        },
+        {
+            "type": "eletrólitos",
+            "limits": "2-68",
+            "result": "61"
+        },
+        {
+            "type": "tsh",
+            "limits": "25-80",
+            "result": "13"
+        },
+        {
+            "type": "t4-livre",
+            "limits": "34-60",
+            "result": "9"
+        },
+        {
+            "type": "ácido úrico",
+            "limits": "15-61",
+            "result": "78"
+        }
+    ]
+}
+```
 
