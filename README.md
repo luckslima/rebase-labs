@@ -10,7 +10,7 @@
 
 ## Sobre o Projeto
 
-Uma aplicação web para listagem de exames médicos.
+Uma pequena aplicação web para listagem de exames médicos.
 
 ### Tecnologias 
 
@@ -20,27 +20,29 @@ Uma aplicação web para listagem de exames médicos.
 - HTML
 - CSS
 
-## API
-
-### Como Rodar? :arrow_forward:
+### Como Rodar a app? :arrow_forward:
 
 - No terminal, clone o projeto:
 
   > git clone git@github.com:luckslima/rebase-labs.git
 
-- Dentro da pasta do projeto, acesse a pasta da API:
+- Em seguida, dentro da pasta do projeto, construa e inicie os containers:
 
-  > cd api/
-
-- Em seguida construa e inicie os containers:
-
-  > docker-compose up
+  > docker-compose up --build
 
 - E logo após importe o CSV para o banco de dados:
 
-  > docker-compose exec app ruby import_from_csv.rb
+  > docker-compose exec api ruby import_from_csv.rb
 
 Pronto! Agora é possível acessar a aplicação através da rota http://localhost:4567/ :wink:
+
+- TESTES:
+
+- Para executar os testes da API rode o comando:
+
+  > docker-compose exec api rspec
+
+## API
 
 ### Endpoints
 

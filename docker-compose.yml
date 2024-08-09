@@ -1,9 +1,9 @@
 services:
-  app:
-    build: .
+  api:
+    build: ./api
     container_name: api
     volumes:
-      - .:/app
+      - ./api:/app
     ports:
       - "4567:4567"
 
