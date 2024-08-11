@@ -1,8 +1,16 @@
 require 'sinatra'
 require 'pg'
 require_relative 'lib/tests'
+require 'rack/cors'
 
 set :bind, '0.0.0.0'
+
+use Rack::Cors do
+  allow do
+    origins '*'
+    resource '*', headers: :any, methods: [:get, :post]
+  end
+end
 
 get '/tests' do
   content_type :json
