@@ -7,6 +7,14 @@ services:
     ports:
       - "4567:4567"
 
+  spa:
+    build: ./spa
+    container_name: spa
+    volumes:
+      - ./spa:/app
+    ports:
+      - "4568:4568"
+
   db:
     image: postgres
     container_name: database

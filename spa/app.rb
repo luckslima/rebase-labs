@@ -1,5 +1,5 @@
 require 'sinatra'
 
-get '/' do
-
+get '/' do 
+  File.open('views/index.html')
 end
