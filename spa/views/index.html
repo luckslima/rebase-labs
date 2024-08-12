@@ -12,19 +12,54 @@
 <body>
     <div class="container">
         <h1 class="mt-5">Listagem de Exames</h1>
-        <table class="table table-bordered mt-3">
-            <thead>
-                <tr>
-                    <th>Token</th>
-                    <th>Data</th>
-                    <th>CPF</th>
-                    <th>Nome</th>
-                    <th>Médico</th>
-                    <th>CRM</th>
-                </tr>
-            </thead>
-            <tbody id="tests-table-body"></tbody>
-        </table>
+
+        <form id="search-form" class="mt-4">
+            <div class="mb-3">
+                <label for="token-input" class="form-label">Buscar por Token</label>
+                <input type="text" id="token-input" class="form-control" placeholder="Insira o token do exame">
+            </div>
+            <button type="submit" class="btn btn-primary">Buscar</button>
+        </form>
+
+        <div id="search-result" class="mt-4" style="display: none;">
+            <div class="card">
+                <div class="card-header">
+                    <h2>Detalhes do Exame</h2>
+                </div>
+                <div class="card-body">
+                    <p><strong>Token:</strong> <span id="detail-token"></span></p>
+                    <p><strong>Data:</strong> <span id="detail-date"></span></p>
+                    <p><strong>CPF:</strong> <span id="detail-cpf"></span></p>
+                    <p><strong>Nome:</strong> <span id="detail-name"></span></p>
+                    <p><strong>Email:</strong> <span id="detail-email"></span></p>
+                    <p><strong>Aniversário:</strong> <span id="detail-birthday"></span></p>
+                    <p><strong>Médico:</strong> <span id="detail-doctor-name"></span></p>
+                    <p><strong>CRM:</strong> <span id="detail-crm"></span></p>
+                    <p><strong>Estado CRM:</strong> <span id="detail-crm-state"></span></p>
+                    <h3>Testes</h3>
+                    <ul id="detail-tests"></ul>
+                </div>
+                <div class="card-footer">
+                    <button id="back-button" class="btn btn-secondary">Voltar à Lista</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="table-responsive mt-3">
+            <table class="table table-bordered mt-3" id="tests-table">
+                <thead>
+                    <tr>
+                        <th>Token</th>
+                        <th>Data</th>
+                        <th>CPF</th>
+                        <th>Nome</th>
+                        <th>Médico</th>
+                        <th>CRM</th>
+                    </tr>
+                </thead>
+                <tbody id="tests-table-body"></tbody>
+            </table>
+        </div>
     </div>
 </body>
 
