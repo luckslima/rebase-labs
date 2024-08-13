@@ -25,24 +25,50 @@ document.addEventListener("DOMContentLoaded", function () {
         event.preventDefault();
         const token = document.getElementById("token-input").value;
         fetch(`${url}/${token}`)
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Exame não encontrado");
+                }
+                return response.json();
+            })
             .then(data => {
-                document.getElementById("detail-token").textContent = data.result_token;
-                document.getElementById("detail-date").textContent = data.result_date;
-                document.getElementById("detail-cpf").textContent = data.cpf;
-                document.getElementById("detail-name").textContent = data.name;
-                document.getElementById("detail-email").textContent = data.email;
-                document.getElementById("detail-birthday").textContent = data.birthday;
-                document.getElementById("detail-doctor-name").textContent = data.doctor.name;
-                document.getElementById("detail-crm").textContent = data.doctor.crm;
-                document.getElementById("detail-crm-state").textContent = data.doctor.crm_state;
-
-                const testsList = data.tests.map(test => `<li>${test.type}: ${test.result} (${test.limits})</li>`).join('');
-                document.getElementById("detail-tests").innerHTML = testsList;
-
-                document.getElementById("search-result").style.display = "block";
+                const resultDiv = document.getElementById("search-result");
+                resultDiv.innerHTML = `
+                    <div class="card card-custom">
+                        <div class="card-header text-center">
+                            <h2>Detalhes do Exame</h2>
+                        </div>
+                        <div class="card-body">
+                            <p><strong>Token:</strong> ${data.result_token}</p>
+                            <p><strong>Data:</strong> ${data.result_date}</p>
+                            <p><strong>CPF:</strong> ${data.cpf}</p>
+                            <p><strong>Nome:</strong> ${data.name}</p>
+                            <p><strong>Email:</strong> ${data.email}</p>
+                            <p><strong>Aniversário:</strong> ${data.birthday}</p>
+                            <p><strong>Médico:</strong> ${data.doctor.name}</p>
+                            <p><strong>CRM:</strong> ${data.doctor.crm}</p>
+                            <p><strong>Estado CRM:</strong> ${data.doctor.crm_state}</p>
+                            <h3>Resultados</h3>
+                            <ul>
+                                ${data.tests.map(test => `<li>${test.type}: ${test.result} (${test.limits})</li>`).join('')}
+                            </ul>
+                        </div>
+                        <div class="card-footer text-center">
+                            <a href="/" class="btn btn-secondary">Voltar à Lista</a>
+                        </div>
+                    </div>
+                `;
+                resultDiv.style.display = "block";
                 document.getElementById("tests-table").style.display = "none";
             })
-            .catch(error => console.error("Erro ao buscar o exame:", error));
+            .catch(error => {
+                const resultDiv = document.getElementById("search-result");
+                resultDiv.innerHTML = `
+                    <div class="alert alert-danger" role="alert">
+                        Exame não encontrado. Verifique o token e tente novamente.
+                    </div>
+                `;
+                resultDiv.style.display = "block";
+            });
     });
 });
