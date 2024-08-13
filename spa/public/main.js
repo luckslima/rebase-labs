@@ -45,9 +45,4 @@ document.addEventListener("DOMContentLoaded", function () {
             })
             .catch(error => console.error("Erro ao buscar o exame:", error));
     });
-
-    document.getElementById("back-button").addEventListener("click", function () {
-        document.getElementById("search-result").style.display = "none";
-        document.getElementById("tests-table").style.display = "block";
-    });
 });
