@@ -1,24 +1,39 @@
 document.addEventListener("DOMContentLoaded", function () {
     const fragment = new DocumentFragment();
     const url = "http://localhost:4567/tests";
+    const tableHeader = document.getElementById("tests-table-header");
+    const tableBody = document.getElementById("tests-table-body");
+    const noDataMessage = document.getElementById("no-data-message");
 
     fetch(url)
         .then(response => response.json())
         .then(data => {
-            const tableBody = document.getElementById("tests-table-body");
-            data.forEach(test => {
-                const row = document.createElement("tr");
-                row.innerHTML = `
-                    <td>${test.result_token}</td>
-                    <td>${test.result_date}</td>
-                    <td>${test.cpf}</td>
-                    <td>${test.name}</td>
-                    <td>${test.doctor.name}</td>
-                    <td>${test.doctor.crm}</td>
-                `;
-                fragment.appendChild(row);
-            });
-            tableBody.appendChild(fragment);
+            if (data.length === 0) {
+                noDataMessage.style.display = "block";
+            } else {
+                noDataMessage.style.display = "none";
+                const headerRow = document.createElement("tr");
+                const headers = ["Token", "Data", "CPF", "Nome", "Médico", "CRM"];
+                headers.forEach(header => {
+                    const th = document.createElement("th");
+                    th.textContent = header;
+                    headerRow.appendChild(th);
+                });
+                tableHeader.appendChild(headerRow);
+                data.forEach(test => {
+                    const row = document.createElement("tr");
+                    row.innerHTML = `
+                        <td>${test.result_token}</td>
+                        <td>${test.result_date}</td>
+                        <td>${test.cpf}</td>
+                        <td>${test.name}</td>
+                        <td>${test.doctor.name}</td>
+                        <td>${test.doctor.crm}</td>
+                    `;
+                    fragment.appendChild(row);
+                });
+                tableBody.appendChild(fragment);
+            }
         });
 
     document.getElementById("search-form").addEventListener("submit", function (event) {

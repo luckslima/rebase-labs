@@ -23,25 +23,19 @@
                 <label for="token-input" class="form-label">Buscar por Token</label>
                 <input type="text" id="token-input" class="form-control" placeholder="Insira o token do exame">
             </div>
-            <button type="submit" class="btn btn-primary">Buscar</button>
+            <button type="submit" class="btn btn-warning">Buscar</button>
         </form>
 
         <div id="search-result" class="mt-4" style="display: none;"></div>
 
         <div class="table-responsive mt-3">
             <table class="table table-bordered table-custom text-center" id="tests-table">
-                <thead>
-                    <tr>
-                        <th>Token</th>
-                        <th>Data</th>
-                        <th>CPF</th>
-                        <th>Nome</th>
-                        <th>Médico</th>
-                        <th>CRM</th>
-                    </tr>
-                </thead>
+                <thead id="tests-table-header"></thead>
                 <tbody id="tests-table-body"></tbody>
             </table>
+            <div id="no-data-message" class="alert alert-warning" style="display: none;">
+                Nenhum dado disponível no momento.
+            </div>
         </div>
     </div>
 </body>
