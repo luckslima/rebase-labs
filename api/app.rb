@@ -1,7 +1,8 @@
 require 'sinatra'
 require 'pg'
-require_relative 'lib/tests'
 require 'rack/cors'
+require_relative 'lib/tests'
+require_relative 'lib/csv_importer'
 
 set :bind, '0.0.0.0'
 
@@ -9,6 +10,18 @@ use Rack::Cors do
   allow do
     origins '*'
     resource '*', headers: :any, methods: [:get, :post]
+  end
+end
+
+post '/import' do
+  if params[:file] && params[:file][:tempfile]
+    csv_importer = CSVImporter.new(params[:file][:tempfile])
+    csv_importer.import
+    status 200
+    body 'Importação concluída!'
+  else
+    status 400
+    body 'Arquivo CSV não encontrado'
   end
 end
 
