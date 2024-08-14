@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     const fragment = new DocumentFragment();
-    const url = "http://localhost:4567/tests";
+    const apiHost = getApiHost();
+    const url = `http://${apiHost}:4567/tests`;
     const tableHeader = document.getElementById("tests-table-header");
     const tableBody = document.getElementById("tests-table-body");
     const noDataMessage = document.getElementById("no-data-message");
@@ -86,4 +87,9 @@ document.addEventListener("DOMContentLoaded", function () {
                 resultDiv.style.display = "block";
             });
     });
+
 });
+
+function getApiHost() {
+    return window.location.hostname === 'localhost' ? 'localhost' : 'api';
+}
