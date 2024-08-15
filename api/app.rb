@@ -1,8 +1,10 @@
 require 'sinatra'
 require 'pg'
 require 'rack/cors'
+require 'sidekiq'
 require_relative 'lib/tests'
 require_relative 'lib/csv_importer'
+require_relative 'lib/csv_import_worker'
 
 set :bind, '0.0.0.0'
 
@@ -15,10 +17,19 @@ end
 
 post '/import' do
   if params[:file] && params[:file][:tempfile]
-    csv_importer = CSVImporter.new(params[:file][:tempfile])
-    csv_importer.import
+    tempfile = params[:file][:tempfile]
+    filename = params[:file][:filename]
+    permanent_path = "./uploads/#{filename}"
+    
+    FileUtils.mkdir_p('./uploads')
+    
+    File.open(permanent_path, 'wb') do |f|
+      f.write(tempfile.read)
+    end
+
+    CSVImportWorker.perform_async(permanent_path)
     status 200
-    body 'Importação concluída!'
+    body 'Importação iniciada em background!'
   else
     status 400
     body 'Arquivo CSV não encontrado'

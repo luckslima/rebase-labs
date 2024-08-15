@@ -8,6 +8,8 @@ gem 'csv'
 gem 'puma'
 gem 'rackup'
 gem 'rack-cors'
+gem 'sidekiq'
+gem 'redis'
 
 group :test do
     gem 'rspec'

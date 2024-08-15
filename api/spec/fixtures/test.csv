@@ -1,0 +1,6 @@
+cpf;nome paciente;email paciente;data nascimento paciente;endereço/rua paciente;cidade paciente;estado paciente;crm médico;crm médico estado;nome médico;email médico;token resultado exame;data exame;tipo exame;limites tipo exame;resultado tipo exame
+123.456.789-00;Pessoa Teste 1;pessoa.teste1@example.com;1990-01-01;Rua Teste 123;Cidade Teste;Estado Teste;TEST001;TT;Dr. Teste Um;dr.teste1@example.com;TOKEN123;2024-01-01;exame_test;10-20;15
+987.654.321-00;Pessoa Teste 2;pessoa.teste2@example.com;1991-02-02;Avenida Teste 456;Cidade Teste;Estado Teste;TEST002;TT;Dr. Teste Dois;dr.teste2@example.com;TOKEN456;2024-02-02;exame_test;20-30;25
+111.222.333-44;Pessoa Teste 3;pessoa.teste3@example.com;1992-03-03;Praça Teste 789;Cidade Teste;Estado Teste;TEST003;TT;Dr. Teste Três;dr.teste3@example.com;TOKEN789;2024-03-03;exame_test;30-40;35
+444.555.666-77;Pessoa Teste 4;pessoa.teste4@example.com;1993-04-04;Rua Teste 101;Cidade Teste;Estado Teste;TEST004;TT;Dr. Teste Quatro;dr.teste4@example.com;TOKEN101;2024-04-04;exame_test;40-50;45
+861.601.745-33;Pessoa Teste 5;pessoa.teste5@example.com;1997-06-04;Rua Teste 555;Cidade Teste;Estado Teste;TEST005;TT;Dr. Teste Quatro;dr.teste4@example.com;TOKEN555;2024-04-04;exame_test;40-50;45

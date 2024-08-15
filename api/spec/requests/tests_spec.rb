@@ -47,4 +47,23 @@ RSpec.describe 'Tests API' do
       expect(json_response["error"]).to eq("Exame não encontrado")
     end
   end
+
+  describe 'POST /import' do
+    it 'starts background processing for CSV import' do
+      file = Rack::Test::UploadedFile.new('spec/fixtures/test.csv', 'text/csv')
+  
+      post '/import', { file: file }
+  
+      expect(last_response).to be_ok
+      expect(last_response.body).to include('Importação iniciada em background!')
+      expect(CSVImportWorker.jobs.size).to eq(1)
+    end
+
+    it 'returns 400 if no file is uploaded' do
+      post '/import'
+      
+      expect(last_response.status).to eq(400)
+      expect(last_response.body).to eq('Arquivo CSV não encontrado')
+    end
+  end
 end
