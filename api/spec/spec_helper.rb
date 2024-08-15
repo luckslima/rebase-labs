@@ -1,12 +1,37 @@
 require 'rack/test'
 require 'rspec'
 require 'sidekiq/testing'
+require 'pg'
 
 ENV['RACK_ENV'] = 'test'
 
 require File.expand_path '../../app.rb', __FILE__
 
 RSpec.configure do |config|
+
+  config.before(:each) do
+    conn = PG.connect(dbname: 'my_database', user: 'postgres', password: 'password', host: 'db')
+    conn.exec("TRUNCATE tests RESTART IDENTITY CASCADE")
+
+    conn.exec_params(
+      "INSERT INTO tests (
+        cpf, nome_paciente, email_paciente, data_nascimento, endereco_rua, cidade, estado,
+        crm_medico, crm_medico_estado, nome_medico, email_medico, token_resultado_exame,
+        data_exame, tipo_exame, limites_tipo_exame, resultado_tipo_exame
+      ) VALUES 
+      ($1, $2, $3, $4, $5, $6, $7, $8, $9, $10, $11, $12, $13, $14, $15, $16)",
+      [
+        '123.456.789-10', 'Fulano da Silva', 'fulano@example.com', '1980-01-01', 'Rua ABC', 'Cidade XYZ', 'Estado UV',
+        '12345', 'SP', 'Beltrana Lima', 'beltrana@example.com', 'IQCZ17', '2023-01-01', 'Tipo A', 'Limite A', 'Resultado A'
+      ]
+    )
+  end
+
+  config.after(:each) do
+    conn = PG.connect(dbname: 'my_database', user: 'postgres', password: 'password', host: 'db')
+    conn.exec("TRUNCATE tests RESTART IDENTITY CASCADE")
+  end
+
   config.include Rack::Test::Methods
   config.order = :random
   Sidekiq::Testing.fake!
