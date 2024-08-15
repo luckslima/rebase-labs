@@ -33,6 +33,19 @@ services:
       - pgdata:/var/lib/postgresql/data
       - ./api/scripts/create_table.sql:/docker-entrypoint-initdb.d/init.sql
 
+  test_db:
+    image: postgres
+    container_name: test_database
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: test_database
+    ports:
+      - "5433:5432"
+    volumes:
+      - pgtestdata:/var/lib/postgresql/data
+      - ./api/scripts/create_table.sql:/docker-entrypoint-initdb.d/init.sql
+
   redis:
     image: redis
     container_name: redis
@@ -51,3 +64,4 @@ services:
 
 volumes:
   pgdata:
+  pgtestdata:

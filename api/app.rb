@@ -15,6 +15,28 @@ use Rack::Cors do
   end
 end
 
+configure :test do
+  set :db_config, {
+    dbname: 'test_database',
+    user: 'postgres',
+    password: 'password',
+    host: 'test_db'
+  }
+end
+
+configure :development, :production do
+  set :db_config, {
+    dbname: 'my_database',
+    user: 'postgres',
+    password: 'password',
+    host: 'db'
+  }
+end
+
+def db_connection
+  @db_connection ||= PG.connect(settings.db_config)
+end
+
 post '/import' do
   if params[:file] && params[:file][:tempfile]
     tempfile = params[:file][:tempfile]
@@ -38,13 +60,13 @@ end
 
 get '/tests' do
   content_type :json
-  tests = Tests.new
+  tests = Tests.new(db_connection)
   all_tests = tests.all
   all_tests.to_json
 end
 
 get '/tests/:token' do
-  tests = Tests.new
+  tests = Tests.new(db_connection)
   test = tests.find_by_token(params[:token])
   if test
     content_type :json

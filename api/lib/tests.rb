@@ -1,13 +1,8 @@
 require 'pg'
 
 class Tests
-  def initialize
-    @conn = PG.connect(
-      dbname: 'my_database',
-      user: 'postgres',
-      password: 'password',
-      host: 'db'
-    )
+  def initialize(db_connection)
+    @conn = db_connection
   end
 
   def all

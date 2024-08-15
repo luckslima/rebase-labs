@@ -10,7 +10,12 @@ require File.expand_path '../../app.rb', __FILE__
 RSpec.configure do |config|
 
   config.before(:each) do
-    conn = PG.connect(dbname: 'my_database', user: 'postgres', password: 'password', host: 'db')
+    conn = PG.connect(
+      dbname: 'test_database',
+      user: 'postgres',
+      password: 'password',
+      host: 'test_db'
+    )
     conn.exec("TRUNCATE tests RESTART IDENTITY CASCADE")
 
     conn.exec_params(
@@ -28,7 +33,12 @@ RSpec.configure do |config|
   end
 
   config.after(:each) do
-    conn = PG.connect(dbname: 'my_database', user: 'postgres', password: 'password', host: 'db')
+    conn = PG.connect(
+      dbname: 'test_database',
+      user: 'postgres',
+      password: 'password',
+      host: 'test_db'
+    )
     conn.exec("TRUNCATE tests RESTART IDENTITY CASCADE")
   end
 
