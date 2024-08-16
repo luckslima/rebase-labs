@@ -2,14 +2,9 @@ require 'pg'
 require 'csv'
 
 class CSVImporter
-  def initialize(file_path)
+  def initialize(file_path, db_config)
     @file_path = file_path
-    @conn = PG.connect(
-      dbname: 'my_database',
-      user: 'postgres',
-      password: 'password',
-      host: 'db'
-    )
+    @conn = PG.connect(db_config)
   end
 
   def import
