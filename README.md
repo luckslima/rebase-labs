@@ -177,3 +177,25 @@ A SPA (Single Page Application) é responsável pela interface do usuário da ap
 
    - **Buscar Exames:** Utilize o campo de busca para inserir o token do exame e visualize os detalhes.
    - **Importar Exames:** Utilize o campo de upload para enviar um arquivo CSV e importar exames para a base de dados.
+
+## Telas do Sistema
+
+### Tela incial, sem dados inseridos
+![image](https://github.com/user-attachments/assets/8bba8f2e-d251-4e0d-9080-d91f84b14b16)
+
+### Tela após a importação do arquivo CSV contendo os dados (zoom reduzido, para melhor visualizaçao)
+![image](https://github.com/user-attachments/assets/32d01e58-e24e-48d1-83ca-76b7ceedfe52)
+
+### Tela de detalhes de um exame (zoom reduzido, para melhor visualizaçao)
+![image](https://github.com/user-attachments/assets/1eeeca1b-6b9b-4f45-8585-17911cbb4b70)
+
+## Contribuições
+
+Contribuições são bem-vindas! Se você encontrar um bug ou tiver uma sugestão, abra um issue ou envie um pull request.
+
+## Agradecimentos
+
+Gostaria de expressar minha mais sincero gratidão à Rebase e ao TreinaDev por propocionarem essa experiência única, intensa e enriquecedora. Encarar esse desafio mudou pra sempre minhas configurações. 💙  
+Agradeço também a todos os meus colegas, e a todos que contribuíram e forneceram feedback ao longo do caminho. Sua ajuda foi fundamental para o desenvolvimento e sucesso deste projeto e do meu crescimento como desenvolvedor.
+
+Muito obrigado a todos!
