@@ -12,13 +12,23 @@
 
 Uma pequena aplicação web para listagem de exames médicos.
 
-### Tecnologias 
+## Estrutura do Projeto
+
+- **API**: Servidor backend para gerenciar exames e importar arquivos CSV.
+- **SPA**: Aplicação frontend para buscar e exibir dados dos exames.
+
+## Pré-requisitos
 
 - Docker
+- Docker Compose
+
+### Tecnologias 
+
 - Ruby
 - Javascript
 - HTML
 - CSS
+- Bootstrap
 
 ### Como Rodar a app? :arrow_forward:
 
@@ -30,17 +40,17 @@ Uma pequena aplicação web para listagem de exames médicos.
 
   > docker-compose up --build
 
-- E logo após importe o CSV para o banco de dados:
-
-  > docker-compose exec api ruby import_from_csv.rb
-
 Pronto! Agora é possível acessar a aplicação através da rota http://localhost:4567/ :wink:
 
-- TESTES:
+- Testes:
 
 - Para executar os testes da API rode o comando:
 
   > docker-compose exec api rspec
+
+- Para executar os testes da SPA rode o comando:
+
+  > docker-compose exec spa npx cypress run
 
 ## API
 
@@ -75,61 +85,6 @@ Exemplo de resposta:
                 "type": "leucócitos",
                 "limits": "9-61",
                 "result": "89"
-            },
-            {
-                "type": "plaquetas",
-                "limits": "11-93",
-                "result": "97"
-            },
-            {
-                "type": "hdl",
-                "limits": "19-75",
-                "result": "0"
-            },
-            {
-                "type": "ldl",
-                "limits": "45-54",
-                "result": "80"
-            },
-            {
-                "type": "vldl",
-                "limits": "48-72",
-                "result": "82"
-            },
-            {
-                "type": "glicemia",
-                "limits": "25-83",
-                "result": "98"
-            },
-            {
-                "type": "tgo",
-                "limits": "50-84",
-                "result": "87"
-            },
-            {
-                "type": "tgp",
-                "limits": "38-63",
-                "result": "9"
-            },
-            {
-                "type": "eletrólitos",
-                "limits": "2-68",
-                "result": "85"
-            },
-            {
-                "type": "tsh",
-                "limits": "25-80",
-                "result": "65"
-            },
-            {
-                "type": "t4-livre",
-                "limits": "34-60",
-                "result": "94"
-            },
-            {
-                "type": "ácido úrico",
-                "limits": "15-61",
-                "result": "2"
             }
         ]
     },
@@ -165,63 +120,60 @@ Exemplo de resposta:
             "type": "leucócitos",
             "limits": "9-61",
             "result": "91"
-        },
-        {
-            "type": "plaquetas",
-            "limits": "11-93",
-            "result": "18"
-        },
-        {
-            "type": "hdl",
-            "limits": "19-75",
-            "result": "74"
-        },
-        {
-            "type": "ldl",
-            "limits": "45-54",
-            "result": "66"
-        },
-        {
-            "type": "vldl",
-            "limits": "48-72",
-            "result": "41"
-        },
-        {
-            "type": "glicemia",
-            "limits": "25-83",
-            "result": "6"
-        },
-        {
-            "type": "tgo",
-            "limits": "50-84",
-            "result": "32"
-        },
-        {
-            "type": "tgp",
-            "limits": "38-63",
-            "result": "16"
-        },
-        {
-            "type": "eletrólitos",
-            "limits": "2-68",
-            "result": "61"
-        },
-        {
-            "type": "tsh",
-            "limits": "25-80",
-            "result": "13"
-        },
-        {
-            "type": "t4-livre",
-            "limits": "34-60",
-            "result": "9"
-        },
-        {
-            "type": "ácido úrico",
-            "limits": "15-61",
-            "result": "78"
         }
     ]
 }
 ```
 
+- 'POST /import' 
+
+> Esse endpoint permite a importação assíncrona de um arquivo CSV com exames médicos.
+
+Exemplo de corpo da requisição:
+
+```
+{file: arquivo.csv}
+```
+
+Exemplo de resposta em caso de sucessso:
+
+```
+status: 200
+body: "Importação iniciada em background!"
+```
+
+Exemplo de resposta em caso de erro:
+
+```
+status: 400
+body: 'Arquivo CSV não encontrado'
+```
+
+## SPA
+
+A SPA (Single Page Application) é responsável pela interface do usuário da aplicação, permitindo a interação com os dados dos exames médicos através de uma interface web.
+
+### Funcionalidades
+
+- **Importação de CSV:** Permite a importação de exames médicos a partir de um arquivo CSV que contenha todos os dados necessários para a exibição.
+- **Listagem de exames:** Após a importação do csv é possível ver a lista exames que contem o Token do exame, a data do resultado, o CPF do paciente, o nome do paciente, o nome do médico e o seu respectivo CRM.
+- **Busca por Token:** Permite a busca de exames médicos utilizando um token específico, mostrando assim mais detalhes daquele exame específico, como por exemplo os resultados do exame. 
+
+### Tecnologias Utilizadas
+
+- HTML 
+- JavaScript
+- CSS
+- Bootstrap
+- Cypress
+
+### Como Rodar a SPA?
+
+1. **Iniciar a Aplicação:**
+
+   Após iniciar os containers com `docker-compose up --build`, a SPA estará disponível em [http://localhost:4568/](http://localhost:4568/).
+
+2. **Interação com a SPA:**
+
+   - **Buscar Exames:** Utilize o campo de busca para inserir o token do exame e visualize os detalhes.
+   - **Importar Exames:** Utilize o campo de upload para enviar um arquivo CSV e importar exames para a base de dados.
