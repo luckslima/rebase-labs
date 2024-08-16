@@ -5,6 +5,7 @@
         "test": "cypress open"
     },
     "devDependencies": {
-        "cypress": "^12.17.4"
+        "cypress": "^12.17.4",
+        "cypress-file-upload": "^5.0.8"
     }
 }

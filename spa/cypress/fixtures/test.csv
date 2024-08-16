@@ -1,0 +1,2 @@
+cpf;nome paciente;email paciente;data nascimento paciente;endereço/rua paciente;cidade paciente;estado paciente;crm médico;crm médico estado;nome médico;email médico;token resultado exame;data exame;tipo exame;limites tipo exame;resultado tipo exame
+123.456.789-00;Pessoa Teste 1;pessoa.teste1@example.com;1990-01-01;Rua Teste 123;Cidade Teste;Estado Teste;TEST001;TT;Dr. Teste Um;dr.teste1@example.com;TOKEN123;2024-01-01;exame_test;10-20;15

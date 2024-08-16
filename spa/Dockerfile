@@ -25,8 +25,6 @@ RUN npm install
 
 COPY . /app
 
-RUN npm install cypress --save-dev
-
 EXPOSE 4568
 
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]

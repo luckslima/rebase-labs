@@ -18,13 +18,29 @@
             </a>
         </div>
 
-        <form id="search-form" class="mt-4">
-            <div class="mb-3">
-                <label for="token-input" class="form-label">Buscar por Token</label>
-                <input type="text" id="token-input" class="form-control" placeholder="Insira o token do exame">
+        <div class="row flex-column justify-content-center mb-3">
+            <div class="col-6 mb-1">
+                <form id="search-form" class="mt-4">
+                    <div class="mb-3">
+                        <label for="token-input" class="form-label">Buscar por Token</label>
+                        <input type="text" id="token-input" class="form-control" placeholder="Insira o token do exame">
+                    </div>
+                    <button type="submit" class="btn btn-warning">Buscar</button>
+                </form>
             </div>
-            <button type="submit" class="btn btn-warning">Buscar</button>
-        </form>
+
+            <div class="col-6">
+                <form id="upload-form" class="mt-1" enctype="multipart/form-data">
+                    <div class="mb-3">
+                        <label for="csv-file" class="form-label">Importar CSV</label>
+                        <input type="file" id="csv-file" class="form-control" accept=".csv">
+                    </div>
+                    <button type="button" class="btn btn-warning" id="import-button">Importar</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="error-message" style="display: none;" class="alert alert-danger"></div>
 
         <div id="search-result" class="mt-4" style="display: none;"></div>
 

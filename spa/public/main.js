@@ -2,6 +2,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const fragment = new DocumentFragment();
     const apiHost = getApiHost();
     const url = `http://${apiHost}:4567/tests`;
+    const uploadUrl = `http://${apiHost}:4567/import`;
     const tableHeader = document.getElementById("tests-table-header");
     const tableBody = document.getElementById("tests-table-body");
     const noDataMessage = document.getElementById("no-data-message");
@@ -85,6 +86,39 @@ document.addEventListener("DOMContentLoaded", function () {
                     </div>
                 `;
                 resultDiv.style.display = "block";
+            });
+    });
+
+    document.getElementById("import-button").addEventListener("click", function () {
+        const fileInput = document.getElementById("csv-file");
+        const file = fileInput.files[0];
+
+        if (!file) {
+            alert("Por favor, selecione um arquivo CSV para importar.");
+            return;
+        }
+
+        const formData = new FormData();
+        formData.append("file", file);
+
+        fetch(uploadUrl, {
+            method: "POST",
+            body: formData
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error("Erro ao importar o arquivo CSV.");
+                }
+                return response.text();
+            })
+            .then(message => {
+                alert(message);
+                window.location.reload();
+            })
+            .catch(error => {
+                const errorMessage = document.getElementById("error-message");
+                errorMessage.textContent = `Erro: ${error.message}`;
+                errorMessage.style.display = "block";
             });
     });
 
