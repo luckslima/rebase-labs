@@ -195,7 +195,7 @@ Contribuições são bem-vindas! Se você encontrar um bug ou tiver uma sugestã
 
 ## Agradecimentos
 
-Gostaria de expressar minha mais sincero gratidão à Rebase e ao TreinaDev por propocionarem essa experiência única, intensa e enriquecedora. Encarar esse desafio mudou pra sempre minhas configurações. 💙  
+Gostaria de expressar minha mais sincera gratidão à Rebase e ao TreinaDev por propocionarem essa experiência única, intensa e enriquecedora. Encarar esse desafio alterou pra sempre minhas configurações. 💙  
 Agradeço também a todos os meus colegas, e a todos que contribuíram e forneceram feedback ao longo do caminho. Sua ajuda foi fundamental para o desenvolvimento e sucesso deste projeto e do meu crescimento como desenvolvedor.
 
 Muito obrigado a todos!
