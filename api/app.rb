@@ -57,10 +57,10 @@ get '/tests' do
 end
 
 get '/tests/:token' do
+  content_type :json
   tests = Tests.new(db_connection)
   test = tests.find_by_token(params[:token])
   if test
-    content_type :json
     test.to_json
   else
     halt 404, { error: "Exame não encontrado" }.to_json
