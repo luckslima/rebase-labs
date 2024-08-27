@@ -15,23 +15,14 @@ use Rack::Cors do
   end
 end
 
-configure :test do
-  set :db_config, {
-    dbname: 'test_database',
-    user: 'postgres',
-    password: 'password',
-    host: 'test_db'
-  }
-end
+db_name = ENV['RACK_ENV'] == 'test' ? 'test_database' : 'my_database'
 
-configure :development, :production do
-  set :db_config, {
-    dbname: 'my_database',
-    user: 'postgres',
-    password: 'password',
-    host: 'db'
-  }
-end
+set :db_config, {
+  dbname: db_name,
+  user: 'postgres',
+  password: 'password',
+  host: 'db'
+}
 
 def db_connection
   @db_connection ||= PG.connect(settings.db_config)

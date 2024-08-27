@@ -14,7 +14,7 @@ RSpec.configure do |config|
       dbname: 'test_database',
       user: 'postgres',
       password: 'password',
-      host: 'test_db'
+      host: 'db'
     )
     conn.exec("TRUNCATE tests RESTART IDENTITY CASCADE")
 
@@ -37,7 +37,7 @@ RSpec.configure do |config|
       dbname: 'test_database',
       user: 'postgres',
       password: 'password',
-      host: 'test_db'
+      host: 'db'
     )
     conn.exec("TRUNCATE tests RESTART IDENTITY CASCADE")
   end

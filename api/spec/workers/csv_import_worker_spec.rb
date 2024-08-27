@@ -21,7 +21,7 @@ RSpec.describe CSVImportWorker do
         dbname: 'test_database',
         user: 'postgres',
         password: 'password',
-        host: 'test_db'
+        host: 'db'
       )
       result = conn.exec("SELECT COUNT(*) FROM tests")
       result[0]['count'].to_i
