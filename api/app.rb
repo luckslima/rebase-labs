@@ -24,10 +24,6 @@ set :db_config, {
   host: 'db'
 }
 
-def db_connection
-  @db_connection ||= PG.connect(settings.db_config)
-end
-
 post '/import' do
   if params[:file] && params[:file][:tempfile]
     tempfile = params[:file][:tempfile]
@@ -51,14 +47,14 @@ end
 
 get '/tests' do
   content_type :json
-  tests = Tests.new(db_connection)
+  tests = Tests.new(settings.db_config)
   all_tests = tests.all
   all_tests.to_json
 end
 
 get '/tests/:token' do
   content_type :json
-  tests = Tests.new(db_connection)
+  tests = Tests.new(settings.db_config)
   test = tests.find_by_token(params[:token])
   if test
     test.to_json

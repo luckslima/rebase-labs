@@ -1,16 +1,16 @@
 require 'spec_helper'
 
 RSpec.describe Tests do
-  let(:conn) do
-    PG.connect(
+  let(:db_config) do
+    {
       dbname: 'test_database',
       user: 'postgres',
       password: 'password',
       host: 'db'
-    )
+    }
   end
 
-  let(:tests) { Tests.new(conn) }
+  let(:tests) { Tests.new(db_config) }
 
   describe '#all' do
     it 'returns all tests grouped by token' do

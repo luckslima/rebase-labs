@@ -1,20 +1,25 @@
 require 'pg'
 
 class Tests
-  def initialize(db_connection)
-    @conn = db_connection
+  def initialize(db_config)
+    @db_config = db_config
+    @conn = PG.connect(@db_config)
   end
 
   def all
     result = @conn.exec("SELECT * FROM tests")
     grouped_tests = group_by_token(result)
     grouped_tests
+  ensure
+    @conn.close if @conn
   end
 
   def find_by_token(token)
     result = @conn.exec_params("SELECT * FROM tests WHERE token_resultado_exame = $1", [token])
     grouped_tests = group_by_token(result)
     grouped_tests.first
+  ensure
+    @conn.close if @conn
   end
 
   private

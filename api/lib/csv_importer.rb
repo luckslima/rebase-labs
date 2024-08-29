@@ -27,5 +27,7 @@ class CSVImporter
         puts "Erro ao inserir linha: #{e.message}"
       end
     end
+  ensure
+    @conn.close if @conn
   end
 end
