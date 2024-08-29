@@ -40,7 +40,12 @@ Uma pequena aplicação web para listagem de exames médicos.
 
   > docker-compose up --build
 
-Pronto! Agora é possível acessar a aplicação através da rota http://localhost:4567/ :wink:
+Pronto! Agora é possível acessar a aplicação através das rotas:
+
+  > API: http://localhost:4567/ 
+  > SPA: http://localhost:4568/
+
+  :wink:
 
 - Testes:
 
@@ -51,6 +56,12 @@ Pronto! Agora é possível acessar a aplicação através da rota http://localho
 - Para executar os testes da SPA rode o comando:
 
   > docker-compose exec spa npx cypress run
+
+- Scripts:
+
+- Para importar um arquivo csv de exames através do terminal, execute o comando:
+
+  > docker-compose exec api ruby import_from_csv.rb caminho/do/arquivo.csv
 
 ## API
 
